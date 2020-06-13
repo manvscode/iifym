@@ -27,9 +27,8 @@
 #include <wchar.h>
 #include <locale.h>
 #include <unistd.h>
-#include <libutility/utility.h>
-#include <libutility/console.h>
-#include <libcollections/vector.h>
+#include <xtd/console.h>
+#include <collections/vector.h>
 #include "tdee.h"
 
 #define VERSION  "1.0"
@@ -415,28 +414,27 @@ done:
 void banner( void )
 {
 	wconsole_fg_color_256( stdout, CONSOLE_COLOR256_RED );
-	wprintf(L"        ___________ _____ _____ \n");
-	wprintf(L"       |_   _|  _  \\  ___|  ___|\n");
-	wprintf(L"         | | | | | | |__ | |__  \n");
-	wprintf(L"         | | | | | |  __||  __| \n");
-	wprintf(L"         | | | |/ /| |___| |___ \n");
-	wprintf(L"         \\_/ |___/ \\____/\\____/ \n");
+	wprintf(L"      ___________ _____ _____ \n");
+	wprintf(L"     |_   _|  _  \\  ___|  ___|\n");
+	wprintf(L"       | | | | | | |__ | |__  \n");
+	wprintf(L"       | | | | | |  __||  __| \n");
+	wprintf(L"       | | | |/ /| |___| |___ \n");
+	wprintf(L"       \\_/ |___/ \\____/\\____/ \n");
 	wconsole_reset( stdout );
 	wconsole_fg_color_256( stdout, CONSOLE_COLOR256_YELLOW );
-	wprintf(L"               Calculator\n");
+	wprintf(L"             Calculator\n");
 	wconsole_reset( stdout );
 }
 
 void about( int argc, char* argv[] )
 {
 	banner();
-	wprintf(L"-------------------------------------\n");
 	wprintf(L" Copyright (c) 2019, Joe Marrero.\n");
 	wprintf(L"     http://joemarrero.com/\n");
 	wprintf(L"\n");
 
 	wprintf(L"Example Usage:\n");
-	wprintf(L"    %s -a 18 -w 165 -h 66 -s m\n", argv[0]);
+	wprintf(L"    %s -a 18 -w 165 -H 66 -s m\n", argv[0]);
 	wprintf(L"\n\n");
 
 	wprintf(L"Command Line Options:\n");
@@ -454,7 +452,7 @@ void about( int argc, char* argv[] )
 	wprintf(L"If you found this utility useful, please consider making a donation\n");
 	wprintf(L"of bitcoin to: ");
 	wconsole_fg_color_256( stdout, CONSOLE_COLOR256_MAGENTA);
-	wprintf(L"1Bmmq4Rp2FbW9ApfEe2MzrPfyPx6jEtURk");
+	wprintf(L"3A5M1m2BNSBgo9V7B8wf6VtWQDMMgp5abZ");
 	wconsole_reset( stdout);
 	wprintf(L"\n\n");
 	wprintf(L"All donations help cover maintenance costs and are much appreciated.\n");

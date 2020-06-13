@@ -21,8 +21,8 @@
 #
 
 #CFLAGS = -O0 -g -Wall -fsanitize=undefined -D_POSIX_C_SOURCE -I /usr/local/include -I extern/include/
-CFLAGS = -std=c99 -O2 -Wall -fsanitize=undefined -D_POSIX_C_SOURCE -I /usr/local/include -I extern/include/
-LDFLAGS = extern/lib/libutility.a extern/lib/libcollections.a extern/lib/libjansson.a -L /usr/local/lib -L extern/lib/ -lm
+CFLAGS = -std=c99 -O2 -Wall -fsanitize=undefined -D_POSIX_C_SOURCE -I /usr/local/include -I extern/include/ -I extern/include/xtd-1.0.0/ -I extern/include/collections-1.0.0/
+LDFLAGS = extern/lib/libxtd.a extern/lib/libcollections.a -L /usr/local/lib -L extern/lib/ -lm
 CWD = $(shell pwd)
 
 # TDEE calculation tool.
@@ -33,9 +33,8 @@ TDEECALC_SOURCES = src/tdee_calc.c
 #IIFYM_BIN = iifym
 #IIFYM_SOURCES = src/iifym.c
 
-all: extern/libutility \
+all: extern/libxtd \
 	 extern/libcollections \
-	 extern/libjansson \
 	 bin/$(TDEECALC_BIN)
 
 bin/$(TDEECALC_BIN): $(TDEECALC_SOURCES:.c=.o)
@@ -44,7 +43,7 @@ bin/$(TDEECALC_BIN): $(TDEECALC_SOURCES:.c=.o)
 	@$(CC) $(CFLAGS) -o bin/$(TDEECALC_BIN) $^ $(LDFLAGS)
 	@echo "Created $@"
 
-#bin/$(IIFYM_BIN): $(IIFYM_SOURCES:.c=.o)
+bin/$(IIFYM_BIN): $(IIFYM_SOURCES:.c=.o)
 	#@mkdir -p bin
 	#@echo "Linking: $^"
 	#@$(CC) $(CFLAGS) -o bin/$(IIFYM_BIN) $^ $(LDFLAGS)
@@ -57,22 +56,15 @@ src/%.o: src/%.c
 #################################################
 # Dependencies                                  #
 #################################################
-extern/libutility:
-	@mkdir -p extern/libutility/
-	@git clone https://bitbucket.org/manvscode/libutility.git extern/libutility/
-	@cd extern/libutility && autoreconf -i && ./configure --libdir=$(CWD)/extern/lib/ --includedir=$(CWD)/extern/include/ && make && make install
+extern/libxtd:
+	@mkdir -p extern/libxtd/
+	@git clone https://bitbucket.org/manvscode/libxtd.git extern/libxtd/
+	@cd extern/libxtd && autoreconf -i && ./configure --libdir=$(CWD)/extern/lib/ --includedir=$(CWD)/extern/include/ && make && make install
 
 extern/libcollections:
 	@mkdir -p extern/libcollections/
 	@git clone https://bitbucket.org/manvscode/libcollections.git extern/libcollections/
 	@cd extern/libcollections && autoreconf -i && ./configure --libdir=$(CWD)/extern/lib/ --includedir=$(CWD)/extern/include/ && make && make install
-
-extern/libjansson:
-	@mkdir -p extern/libjansson/
-	@git clone https://github.com/akheron/jansson extern/libjansson
-	@cd extern/libjansson && autoreconf -i && ./configure --libdir=$(CWD)/extern/lib/ --includedir=$(CWD)/extern/include/ && make && make install
-
-
 
 #################################################
 # Cleaning                                      #
