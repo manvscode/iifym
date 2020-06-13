@@ -413,7 +413,7 @@ done:
 
 void banner( void )
 {
-	wconsole_fg_color_256( stdout, CONSOLE_COLOR256_RED );
+	wconsole_fg_color_256( stdout, CONSOLE_COLOR256_BRIGHT_RED );
 	wprintf(L"      ___________ _____ _____ \n");
 	wprintf(L"     |_   _|  _  \\  ___|  ___|\n");
 	wprintf(L"       | | | | | | |__ | |__  \n");
@@ -421,7 +421,7 @@ void banner( void )
 	wprintf(L"       | | | |/ /| |___| |___ \n");
 	wprintf(L"       \\_/ |___/ \\____/\\____/ \n");
 	wconsole_reset( stdout );
-	wconsole_fg_color_256( stdout, CONSOLE_COLOR256_YELLOW );
+	wconsole_fg_color_256( stdout, CONSOLE_COLOR256_BRIGHT_YELLOW );
 	wprintf(L"             Calculator\n");
 	wconsole_reset( stdout );
 }
